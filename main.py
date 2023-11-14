@@ -25,6 +25,8 @@ while True:
         right_shoulder_x = int(points.landmark[pose.PoseLandmark.RIGHT_SHOULDER].x * width)
         right_elbow_x = int(points.landmark[pose.PoseLandmark.RIGHT_ELBOW].x * width)
         right_elbow_y = int(points.landmark[pose.PoseLandmark.RIGHT_ELBOW].y * height)
+        left_elbow_x = int(points.landmark[pose.PoseLandmark.LEFT_ELBOW].x * width)
+        left_elbow_y = int(points.landmark[pose.PoseLandmark.LEFT_ELBOW].y * height)
         left_index_y = int(points.landmark[pose.PoseLandmark.LEFT_INDEX].y * height)
         left_index_x = int(points.landmark[pose.PoseLandmark.LEFT_INDEX].x * width)
         left_shoulder_y = int(points.landmark[pose.PoseLandmark.LEFT_SHOULDER].y * height)
@@ -32,17 +34,32 @@ while True:
         nose_y = int(points.landmark[pose.PoseLandmark.NOSE].y * height)
         nose_x = int(points.landmark[pose.PoseLandmark.NOSE].x * width)
 
+        # Pegando as distancias
         dist_maoDireita_ombro = int(
             math.hypot(right_index_x - right_shoulder_x, right_index_y - right_shoulder_y))
 
-        print(f"Hypot: {dist_maoDireita_ombro}")
+        dist_maoEsquerda_ombro = int(
+            math.hypot(left_index_x-left_shoulder_x, left_index_y-left_shoulder_y))
+        
+        dist_entreMaos = int(
+            math.hypot(right_index_x-left_index_x, right_index_y-left_index_y))
+        
+        # Andar 
+        if (right_index_x > right_elbow_x) and (dist_maoDireita_ombro < 100) and (dist_entreMaos > 100):
+            print("Andando Pra Frente")
 
+        if (left_index_x < left_elbow_x) and (dist_maoEsquerda_ombro < 100) and (dist_entreMaos > 100):
+            print("Andando Pra Trás")
 
         # Desenha uma linha na altura do nariz
         cv2.line(img, (0, nose_y), (640, nose_y), (0, 255, 0), 1)
 
-        # Desenha uma linha vertical sobre o elbow
+        # Desenha uma linha vertical sobre os cotovelos
         cv2.line(img, (right_elbow_x, 0), (right_elbow_x, 480), (0, 255, 0), 1)
+        cv2.line(img, (left_elbow_x, 0), (left_elbow_x, 480), (0, 255, 0), 1)
 
     cv2.imshow("Image", img)
-    cv2.waitKey(10)
+
+    # Aperte ESC para fechar o app
+    if cv2.waitKey(10) == 27:
+        break
