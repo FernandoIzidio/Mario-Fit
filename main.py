@@ -9,9 +9,11 @@ video = cv2.VideoCapture(VIDEO_PATH)
 pose = mp.solutions.pose
 mp_pose = pose.Pose(min_tracking_confidence=0.5, min_detection_confidence=0.5)
 mp_draw = mp.solutions.drawing_utils
+VIDEO_SIZE = (640, 480)  
 
 while True:
     success, img = video.read()
+    img = cv2.resize(img, (VIDEO_SIZE[0], VIDEO_SIZE[1]))
     video_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = mp_pose.process(video_rgb)
     points = results.pose_landmarks
