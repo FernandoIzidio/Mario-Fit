@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import math
 from os import system
-VIDEO_PATH = 'Video4.mp4'
+VIDEO_PATH = 0
 
 video = cv2.VideoCapture(VIDEO_PATH)
 pose = mp.solutions.pose
