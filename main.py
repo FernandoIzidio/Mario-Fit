@@ -3,15 +3,12 @@ import mediapipe as mp
 import math
 from package import *
 
-VIDEO_PATH = 'Video6.mp4'
+VIDEO_PATH = 0
 
 video = cv2.VideoCapture(VIDEO_PATH)
 pose = mp.solutions.pose
 mp_pose = pose.Pose(min_tracking_confidence=0.5, min_detection_confidence=0.5)
 mp_draw = mp.solutions.drawing_utils
-
-pulo_confirmado = 0
-agachar_confirmado = 0
 
 while True:
     success, img = video.read()
