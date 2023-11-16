@@ -1,15 +1,15 @@
 import threading
 import pydirectinput
 import time
-
-key_pressed = False                    
+               
 usou_poder = False       
 
 # CONFIG MULTI THREADING
 def press_key_in_background(key, command):
     thread = threading.Thread(target=press_key, args=(key, command,))
     thread.start()
-
+    
+# CONFIG INPUT 
 def press_key(key, command):
     if command == 'press':
         pydirectinput.keyDown(key)
@@ -20,6 +20,7 @@ def press_key(key, command):
     elif command == 'keyup':
         pydirectinput.keyUp(key)
 
+# Soltar poder
 def soltarPoder(dist_entreMaos):
     global usou_poder
 

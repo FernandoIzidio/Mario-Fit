@@ -1,8 +1,7 @@
 import threading
 import pydirectinput
 import time
-
-key_pressed = False                    
+                 
 key_run_right = False
 key_run_left = False         
 
@@ -11,6 +10,7 @@ def press_key_in_background(key, command):
     thread = threading.Thread(target=press_key, args=(key, command,))
     thread.start()
 
+# CONFIG INPUT 
 def press_key(key, command):
     if command == 'press':
         pydirectinput.keyDown(key)
@@ -21,8 +21,8 @@ def press_key(key, command):
     elif command == 'keyup':
         pydirectinput.keyUp(key)
 
+# Correr pra frente
 def correrFrente(maoDireita_x,cotoveloDireito_x,dist_maoDireita_cintura):
-    global key_pressed
     global key_run_right
 
     if maoDireita_x < cotoveloDireito_x and dist_maoDireita_cintura > 110:
@@ -37,8 +37,8 @@ def correrFrente(maoDireita_x,cotoveloDireito_x,dist_maoDireita_cintura):
                 press_key_in_background('right', 'keyup')
             key_run_right = False
 
+# Correr pra tras
 def correrTras(maoEsquerda_x,cotoveloEsquerdo_x,dist_maoEsquerda_cintura):
-    global key_pressed
     global key_run_left
 
     if maoEsquerda_x > cotoveloEsquerdo_x and dist_maoEsquerda_cintura > 110:

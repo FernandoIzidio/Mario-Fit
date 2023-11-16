@@ -17,6 +17,7 @@ def press_key_in_background(key, command):
     thread = threading.Thread(target=press_key, args=(key, command,))
     thread.start()
 
+# CONFIG INPUT 
 def press_key(key, command):
     if command == 'press':
         pydirectinput.keyDown(key)
@@ -27,8 +28,8 @@ def press_key(key, command):
     elif command == 'keyup':
         pydirectinput.keyUp(key)
 
-# Função Pular
-def pular(img,width,nose_y,dist_cabeca_teto,dist_mao_nariz,right_eye_y,right_shoulder_y):
+# Função Pular e Agachar
+def pularAgachar(img,width,nose_y,dist_cabeca_teto,dist_mao_nariz,right_eye_y,right_shoulder_y):
     global pulo_confirmado
     global agachar_confirmado
     global is_jumping

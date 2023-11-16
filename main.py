@@ -75,8 +75,8 @@ while True:
         # Soltar poder
         soltarPoder(dist_entreMaos)
 
-        # Pular
-        pular(img,width,nose_y,dist_cabeca_teto,dist_mao_nariz,right_eye_y,right_shoulder_y)
+        # Pular e agachar
+        pularAgachar(img,width,nose_y,dist_cabeca_teto,dist_mao_nariz,right_eye_y,right_shoulder_y)
 
         # Desenha uma linha na altura do nariz
         cv2.line(img, (0, nose_y), (width, nose_y), (0, 255, 0), 1)
