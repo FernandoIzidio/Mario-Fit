@@ -3,8 +3,8 @@ import pydirectinput
 import time
                
 key_right_pressed = False             
-key_left_pressed = False               
-
+key_left_pressed = False       
+        
 # CONFIG MULTI THREADING
 def press_key_in_background(key, command):
     thread = threading.Thread(target=press_key, args=(key, command,))
@@ -22,39 +22,33 @@ def press_key(key, command):
         pydirectinput.keyUp(key)
 
 # Função Andar Pra Frente
-def frente(maoDireita_x,cotoveloDireito_x,dist_maoDireita_cintura,dist_entreMaos):
+def frente(maoDireita_x,cotoveloDireito_x,dist_maoDireita_cintura,dist_entreMaos, altura_maoDireita, altura_cintura):
     global key_right_pressed
 
-    if (dist_maoDireita_cintura > 55) and (dist_entreMaos > 100):
+    if (dist_maoDireita_cintura > 90) and (dist_entreMaos > 100 ) and (altura_maoDireita < (altura_cintura-30)):
         
         if key_right_pressed is False:
-            print("Andando")
             press_key_in_background('right', 'keydown')
             key_right_pressed = True
 
         if (maoDireita_x < cotoveloDireito_x):
-            print("Correndo")
             press_key_in_background('x', 'keydown')      
         else:
-            print("Não Correndo")
             press_key_in_background('x', 'keyup')
 
                         
     else:
         if key_right_pressed:
             if key_right_pressed:
-                print("Não Correndo")
-                print("Não Andando")
                 press_key_in_background('x', 'keyup')
                 press_key_in_background('right', 'keyup')
             key_right_pressed = False
 
 # Função Andar/Correr Pra Tras
-def tras(maoEsquerda_x,cotoveloEsquerdo_x,dist_maoEsquerda_cintura,dist_entreMaos):
+def tras(maoEsquerda_x,cotoveloEsquerdo_x,dist_maoEsquerda_cintura,dist_entreMaos,altura_maoEsquerda,altura_cintura):
     global key_left_pressed
-    global key_run_left
     
-    if (dist_maoEsquerda_cintura > 55) and (dist_entreMaos > 100):
+    if (dist_maoEsquerda_cintura > 90) and (dist_entreMaos > 100) and (altura_maoEsquerda < (altura_cintura-30)):
 
         if key_left_pressed is False:
             press_key_in_background('left', 'keydown')

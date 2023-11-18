@@ -64,9 +64,10 @@ while True:
         dist_maoEsquerda_cintura = int(
             math.hypot(left_index_x-left_hip_x, left_index_y-left_hip_y))
 
+
         # Movimentar
-        frente(right_index_x,right_elbow_x,dist_maoDireita_cintura,dist_entreMaos)
-        tras(left_index_x,left_elbow_x,dist_maoEsquerda_cintura,dist_entreMaos)
+        frente(right_index_x,right_elbow_x,dist_maoDireita_cintura,dist_entreMaos,right_index_y,right_hip_y)
+        tras(left_index_x,left_elbow_x,dist_maoEsquerda_cintura,dist_entreMaos,left_index_y,left_hip_y)
 
         # Pular e agachar
         pularAgachar(img,width,nose_y,dist_cabeca_teto,dist_mao_nariz,right_eye_y,right_shoulder_y)
@@ -84,3 +85,9 @@ while True:
     # Aperte ESC para fechar o app
     if cv2.waitKey(10) == 27:
         break
+
+press_key_in_background('x', 'keyup')
+press_key_in_background('right', 'keyup')
+press_key_in_background('left', 'keyup')
+press_key_in_background('c', 'keyup')
+press_key_in_background('down', 'keyup')
